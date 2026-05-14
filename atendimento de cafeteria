@@ -1,0 +1,75 @@
+/*
+Aluno: Oziel da Silva Freitas
+Atividade: Atendimento de Cafeteria
+*/
+
+#include <stdio.h>
+#include <string.h> // Biblioteca usada para strcmp() e strcspn()
+
+int main()
+{
+    char strPedido[50];
+    float fTotalConta = 0.0;
+
+    printf("=== Atendimento de Cafeteria ===\n\n");
+
+    printf("Cardapio:\n");
+    printf("cafe - R$ 5.00\n");
+    printf("bolo - R$ 7.00\n");
+    printf("suco - R$ 6.00\n");
+    printf("sanduiche - R$ 10.00\n\n");
+
+    printf("Digite seu pedido.\n");
+    printf("Digite 'conta' para finalizar ou 'sair' para encerrar.\n\n");
+
+    // Laço while usado para aceitar pedidos continuamente
+    while (1)
+    {
+        printf("Pedido: ");
+
+        // Lê o pedido digitado pelo usuário
+        fgets(strPedido, 50, stdin);
+
+        // Remove a quebra de linha deixada pelo fgets()
+        strPedido[strcspn(strPedido, "\n")] = '\0';
+
+        // Compara o texto digitado com as opções do cardápio
+        if (strcmp(strPedido, "cafe") == 0)
+        {
+            fTotalConta += 5.00;
+            printf("Cafe adicionado ao pedido.\n\n");
+        }
+        else if (strcmp(strPedido, "bolo") == 0)
+        {
+            fTotalConta += 7.00;
+            printf("Bolo adicionado ao pedido.\n\n");
+        }
+        else if (strcmp(strPedido, "suco") == 0)
+        {
+            fTotalConta += 6.00;
+            printf("Suco adicionado ao pedido.\n\n");
+        }
+        else if (strcmp(strPedido, "sanduiche") == 0)
+        {
+            fTotalConta += 10.00;
+            printf("Sanduiche adicionado ao pedido.\n\n");
+        }
+        else if (strcmp(strPedido, "conta") == 0)
+        {
+            printf("\nTotal da conta: R$ %.2f\n", fTotalConta);
+            printf("Obrigado pela preferencia!\n");
+            break;
+        }
+        else if (strcmp(strPedido, "sair") == 0)
+        {
+            printf("\nAtendimento encerrado.\n");
+            break;
+        }
+        else
+        {
+            printf("Pedido nao encontrado no cardapio.\n\n");
+        }
+    }
+
+    return 0;
+}

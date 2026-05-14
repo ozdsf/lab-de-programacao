@@ -1,0 +1,84 @@
+/*
+Aluno: Oziel da Silva Freitas
+Atividade: Jogo da Forca
+*/
+
+#include <stdio.h>
+#include <string.h> // Biblioteca usada para strlen()
+
+int main()
+{
+    char strPalavraSecreta[] = "sistema";
+    char strPalavraAtual[20];
+    char cLetra;
+    int iTamanhoPalavra;
+    int iErros = 0;
+    int iAcertos = 0;
+    int iEncontrouLetra;
+    int iPosicao;
+
+    iTamanhoPalavra = strlen(strPalavraSecreta);
+
+    // Preenche a palavra atual com traços para esconder as letras
+    for (iPosicao = 0; iPosicao < iTamanhoPalavra; iPosicao++)
+    {
+        strPalavraAtual[iPosicao] = '_';
+    }
+
+    strPalavraAtual[iTamanhoPalavra] = '\0';
+
+    printf("=== Jogo da Forca ===\n\n");
+    printf("Adivinhe a palavra secreta.\n");
+    printf("Voce pode errar no maximo 6 vezes.\n\n");
+
+    // O jogo continua enquanto o usuário não vencer e não atingir 6 erros
+    while (iErros < 6 && iAcertos < iTamanhoPalavra)
+    {
+        printf("Palavra: ");
+
+        for (iPosicao = 0; iPosicao < iTamanhoPalavra; iPosicao++)
+        {
+            printf("%c ", strPalavraAtual[iPosicao]);
+        }
+
+        printf("\nErros: %d de 6\n", iErros);
+        printf("Digite uma letra: ");
+        scanf(" %c", &cLetra);
+
+        iEncontrouLetra = 0;
+
+        // Verifica se a letra digitada existe na palavra secreta
+        for (iPosicao = 0; iPosicao < iTamanhoPalavra; iPosicao++)
+        {
+            if (strPalavraSecreta[iPosicao] == cLetra && strPalavraAtual[iPosicao] == '_')
+            {
+                strPalavraAtual[iPosicao] = cLetra;
+                iAcertos++;
+                iEncontrouLetra = 1;
+            }
+        }
+
+        if (iEncontrouLetra == 1)
+        {
+            printf("\nLetra correta!\n\n");
+        }
+        else
+        {
+            iErros++;
+            printf("\nLetra incorreta!\n\n");
+        }
+    }
+
+    if (iAcertos == iTamanhoPalavra)
+    {
+        printf("Parabens! Voce venceu!\n");
+        printf("A palavra era: %s\n", strPalavraSecreta);
+    }
+    else
+    {
+        printf("Voce perdeu!\n");
+        printf("A palavra era: %s\n", strPalavraSecreta);
+    }
+
+    return 0;
+}

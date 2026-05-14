@@ -1,0 +1,146 @@
+/*
+Aluno: Oziel da Silva Freitas
+Atividade: Jogo da Velha
+*/
+
+#include <stdio.h>
+
+// Função responsável por exibir o tabuleiro na tela
+void MostrarTabuleiro(char mtzTabuleiro[3][3])
+{
+    int iLinha;
+    int iColuna;
+
+    printf("\n");
+
+    for (iLinha = 0; iLinha < 3; iLinha++)
+    {
+        for (iColuna = 0; iColuna < 3; iColuna++)
+        {
+            printf(" %c ", mtzTabuleiro[iLinha][iColuna]);
+
+            if (iColuna < 2)
+            {
+                printf("|");
+            }
+        }
+
+        printf("\n");
+
+        if (iLinha < 2)
+        {
+            printf("---+---+---\n");
+        }
+    }
+
+    printf("\n");
+}
+
+// Função responsável por verificar se algum jogador venceu
+char VerificarVencedor(char mtzTabuleiro[3][3])
+{
+    int iPosicao;
+
+    // Verifica as linhas
+    for (iPosicao = 0; iPosicao < 3; iPosicao++)
+    {
+        if (mtzTabuleiro[iPosicao][0] == mtzTabuleiro[iPosicao][1] &&
+            mtzTabuleiro[iPosicao][1] == mtzTabuleiro[iPosicao][2])
+        {
+            return mtzTabuleiro[iPosicao][0];
+        }
+    }
+
+    // Verifica as colunas
+    for (iPosicao = 0; iPosicao < 3; iPosicao++)
+    {
+        if (mtzTabuleiro[0][iPosicao] == mtzTabuleiro[1][iPosicao] &&
+            mtzTabuleiro[1][iPosicao] == mtzTabuleiro[2][iPosicao])
+        {
+            return mtzTabuleiro[0][iPosicao];
+        }
+    }
+
+    // Verifica a diagonal principal
+    if (mtzTabuleiro[0][0] == mtzTabuleiro[1][1] &&
+        mtzTabuleiro[1][1] == mtzTabuleiro[2][2])
+    {
+        return mtzTabuleiro[0][0];
+    }
+
+    // Verifica a diagonal secundária
+    if (mtzTabuleiro[0][2] == mtzTabuleiro[1][1] &&
+        mtzTabuleiro[1][1] == mtzTabuleiro[2][0])
+    {
+        return mtzTabuleiro[0][2];
+    }
+
+    return ' ';
+}
+
+int main()
+{
+    char mtzTabuleiro[3][3] = {
+        {'1', '2', '3'},
+        {'4', '5', '6'},
+        {'7', '8', '9'}};
+
+    int iJogada;
+    int iRodada = 0;
+    int iLinha;
+    int iColuna;
+    char cJogadorAtual = 'X';
+    char cVencedor = ' ';
+
+    printf("=== Jogo da Velha ===\n");
+    printf("Dois jogadores humanos: X e O\n");
+
+    // O jogo continua enquanto não houver vencedor e ainda existirem jogadas
+    while (iRodada < 9 && cVencedor == ' ')
+    {
+        MostrarTabuleiro(mtzTabuleiro);
+
+        printf("Jogador %c, escolha uma posicao de 1 a 9: ", cJogadorAtual);
+        scanf("%d", &iJogada);
+
+        // Converte a posição escolhida para linha e coluna da matriz
+        iLinha = (iJogada - 1) / 3;
+        iColuna = (iJogada - 1) % 3;
+
+        // Verifica se a jogada é válida
+        if (iJogada < 1 || iJogada > 9 || mtzTabuleiro[iLinha][iColuna] == 'X' || mtzTabuleiro[iLinha][iColuna] == 'O')
+        {
+            printf("\nJogada invalida! Tente novamente.\n");
+        }
+        else
+        {
+            mtzTabuleiro[iLinha][iColuna] = cJogadorAtual;
+            iRodada++;
+
+            cVencedor = VerificarVencedor(mtzTabuleiro);
+
+            // Alterna entre os jogadores X e O
+            if (cJogadorAtual == 'X')
+            {
+                cJogadorAtual = 'O';
+            }
+            else
+            {
+                cJogadorAtual = 'X';
+            }
+        }
+    }
+
+    MostrarTabuleiro(mtzTabuleiro);
+
+    if (cVencedor == 'X' || cVencedor == 'O')
+    {
+        printf("Jogador %c venceu!\n", cVencedor);
+    }
+    else
+    {
+        printf("Empate!\n");
+    }
+
+    return 0;
+}

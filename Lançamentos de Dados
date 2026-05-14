@@ -1,0 +1,47 @@
+/*
+Aluno: Oziel da Silva Freitas
+Atividade: Lançamento de Dados
+*/
+
+#include <stdio.h>
+#include <stdlib.h> // Biblioteca usada para rand() e srand()
+#include <time.h>   // Biblioteca usada para time()
+
+int main()
+{
+    int iPrimeiroDado;
+    int iSegundoDado;
+    int iSomaDados;
+
+    // Inicializa a geração de números aleatórios
+    srand(time(NULL));
+
+    printf("=== Lancamento de Dados ===\n\n");
+
+    // Gera dois valores aleatórios entre 1 e 6
+    iPrimeiroDado = rand() % 6 + 1;
+    iSegundoDado = rand() % 6 + 1;
+
+    // Soma os valores dos dois dados
+    iSomaDados = iPrimeiroDado + iSegundoDado;
+
+    printf("Primeiro dado: %d\n", iPrimeiroDado);
+    printf("Segundo dado: %d\n", iSegundoDado);
+    printf("Soma dos dados: %d\n\n", iSomaDados);
+
+    // Verifica o resultado conforme as regras do jogo
+    if (iSomaDados == 7 || iSomaDados == 11)
+    {
+        printf("Resultado: Vitoria!\n");
+    }
+    else if (iSomaDados == 2 || iSomaDados == 3 || iSomaDados == 12)
+    {
+        printf("Resultado: Derrota!\n");
+    }
+    else
+    {
+        printf("Resultado: Ponto! Continue jogando.\n");
+    }
+
+    return 0;
+}
