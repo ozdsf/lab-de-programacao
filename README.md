@@ -9,3 +9,6 @@ https://www.notion.so/Documenta-o-de-Software-Sistema-de-Gest-o-de-Desempenho-33
 
 Relatório de implementação - Tabela Verdade:
 https://www.notion.so/Relat-rio-de-Implementa-o-Tabela-Verdade-357adc72345980fdbea3dd450e9b500f?source=copy_link
+
+Atividade: for, while, do-while
+https://www.notion.so/Relat-rio-de-Implementa-o-Programa-o-em-C-3600164173008071b5efc0decf2f3d93?source=copy_link
